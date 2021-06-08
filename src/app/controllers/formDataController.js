@@ -16,4 +16,14 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.delete('/:formDataId', async(req, res) => {
+    try {
+        await Form.findByIdAndRemove(req.params.formDataId);
+
+        return res.send();
+    } catch (err) {
+        return res.status(400).send({ error: 'Error deleting project' });
+    }
+});
+
 module.exports = app => app.use('/formdata', router);
